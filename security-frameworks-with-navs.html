@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <meta name="description" content="A guide to the main AI security frameworks like NIST AI RMF, MITRE ATLAS, ISO 42001, and OWASP for LLMs.">
+    <meta name="keywords" content="AI security frameworks, NIST AI RMF, MITRE ATLAS, ISO 42001, OWASP LLM, AI governance">
+    <title>AI Security Frameworks | Mirror Labs</title>
+    <meta property="og:title" content="AI Security Frameworks | Mirror Labs">
+    <meta property="og:description" content="A guide to the main AI security frameworks like NIST AI RMF, MITRE ATLAS, ISO 42001, and OWASP for LLMs.">
+    <meta property="og:type" content="article">
+    
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+        
+        /* Header */
+        header {
+            background: #0a0a0a;
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+        }
+        
+        nav a {
+            color: #999;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: white;
+        }
+        
+        /* Layout Container */
+        .page-container {
+            display: grid;
+            grid-template-columns: 250px 1fr 200px;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 3rem;
+            padding: 2rem;
+        }
+        
+        /* Left Sidebar */
+        .sidebar-left {
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 100px);
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+        
+        .sidebar-left h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+        
+        .nav-section ul {
+            list-style: none;
+        }
+        
+        .nav-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-section a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        .nav-section a:hover {
+            color: #000;
+            background: #f5f5f5;
+        }
+        
+        .nav-section a.active {
+            color: #000;
+            background: #e8e8e8;
+            font-weight: 500;
+        }
+        
+        .progress-indicator {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f8f8f8;
+            border-radius: 8px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin: 0.5rem 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0066ff, #00ccff);
+            width: 100%;
+            transition: width 0.3s;
+        }
+        
+        .progress-text {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        /* Main Content */
+        .main-content {
+            max-width: 800px;
+        }
+        
+        .breadcrumb {
+            font-size: 0.875rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            color: #000;
+        }
+        
+        .page-header {
+            margin-bottom: 2rem;
+        }
+        
+        .page-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            color: #666;
+        }
+        
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .badge-beginner {
+            background: #e6f7e6;
+            color: #0d8a0d;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .summary-box {
+            background: #f8f9fa;
+            border-left: 4px solid #0066ff;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        
+        .summary-box h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .summary-box ul {
+            list-style: none;
+        }
+        
+        .summary-box li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        
+        .summary-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #0066ff;
+            font-weight: bold;
+        }
+        
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin: 3rem 0 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e8e8e8;
+        }
+        
+        h2:first-of-type {
+            border-top: none;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+        }
+        
+        p {
+            margin-bottom: 1.25rem;
+            color: #333;
+        }
+        
+        strong {
+            font-weight: 600;
+            color: #000;
+        }
+        
+        ul, ol {
+            margin-bottom: 1.25rem;
+            padding-left: 2rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .callout {
+            background: #fff8e6;
+            border-left: 4px solid #ffb800;
+            padding: 1.25rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .info-callout {
+            background: #e6f7ff;
+            border-left: 4px solid #0066ff;
+        }
+        
+        .success-callout {
+            background: #e6f7e6;
+            border-left: 4px solid #0d8a0d;
+        }
+        
+        .step-card {
+            background: white;
+            border: 2px solid #e8e8e8;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            transition: all 0.3s;
+        }
+        
+        .step-card:hover {
+            border-color: #0066ff;
+            box-shadow: 0 8px 24px rgba(0, 102, 255, 0.12);
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #0066ff, #00ccff);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .step-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .step-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem;
+            color: #0066ff;
+        }
+        
+        .checklist {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .checklist ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
+        
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            color: #0066ff;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .tool-card {
+            background: white;
+            border: 1px solid #e8e8e8;
+            padding: 1.25rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        
+        .tool-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-color: #0066ff;
+        }
+        
+        .tool-name {
+            font-weight: 600;
+            color: #0066ff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tool-description {
+            font-size: 0.875rem;
+            color: #666;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .timeline:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #0066ff, #00ccff);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: -2.5rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #0066ff;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #0066ff;
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+            color: #0066ff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .key-takeaways {
+            background: #f0f7ff;
+            border: 1px solid #b3d9ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+        }
+        
+        .key-takeaways h3 {
+            margin-top: 0;
+            color: #0066ff;
+        }
+        
+        .key-takeaways ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .key-takeaways li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+        
+        .key-takeaways li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #0066ff;
+            font-weight: bold;
+        }
+        
+        .cta-box {
+            background: linear-gradient(135deg, #0066ff, #00ccff);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .cta-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-box p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: white;
+            color: #0066ff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 3rem 0;
+            padding-top: 2rem;
+            border-top: 1px solid #e8e8e8;
+        }
+        
+        .nav-button {
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            color: white;
+            background: #0066ff;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        
+        .nav-button:hover {
+            background: #0052cc;
+        }
+        
+        .nav-button.prev {
+            background: #666;
+        }
+        
+        .nav-button.prev:hover {
+            background: #444;
+        }
+        
+        /* Right Sidebar */
+        .sidebar-right {
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 100px);
+            font-size: 0.875rem;
+        }
+        
+        .toc {
+            margin-bottom: 2rem;
+        }
+        
+        .toc h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .toc a {
+            color: #666;
+            text-decoration: none;
+            display: block;
+            transition: color 0.2s;
+        }
+        
+        .toc a:hover {
+            color: #000;
+        }
+        
+        .toc a.active {
+            color: #0066ff;
+            font-weight: 500;
+        }
+        
+        /* AI Summary Section */
+        .ai-summary-section {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .ai-summary-section h4 {
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .ai-summary-section p {
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        
+        .ai-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+        
+        .ai-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.6rem;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .ai-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .ai-icon {
+            font-size: 16px;
+        }
+        
+        .related-links {
+            margin-top: 2rem;
+        }
+        
+        .related-links h4 {
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .related-links a {
+            display: block;
+            color: #0066ff;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+        }
+        
+        .related-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .page-container {
+                grid-template-columns: 200px 1fr;
+            }
+            
+            .sidebar-right {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .page-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar-left {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .ai-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <a href="/" class="logo">Mirror Labs</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/fundamentals">Docs</a>
+      <a href="/learning-paths">Learning Paths</a>
+      <a href="https://mirrorsecurity.io">Mirror Security</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-container">
+  <aside class="sidebar-left">
+<nav class="nav-section"><h3>Fundamentals</h3><ul>
+<li><a href="/fundamentals/intro-to-ai-security">Introduction to AI Security</a></li>
+<li><a href="/fundamentals/ai-vs-traditional-security">AI vs Traditional Security</a></li>
+<li><a href="/fundamentals/threat-landscape">Threat Landscape</a></li>
+<li><a href="/fundamentals/security-frameworks" class="active">Security Frameworks</a></li>
+<li><a href="/fundamentals/getting-started">Getting Started Guide</a></li>
+</ul></nav>
+<nav class="nav-section"><h3>Vector Database Security</h3><ul>
+<li><a href="/vector-db/architecture">Architecture</a></li>
+<li><a href="/vector-db/vulnerabilities">Common Vulnerabilities</a></li>
+<li><a href="/vector-db/encryption">Encryption Methods</a></li>
+</ul></nav>
+<nav class="nav-section"><h3>AI Agent Security</h3><ul>
+<li><a href="/agent-security/architecture">Agent Architecture</a></li>
+<li><a href="/agent-security/prompt-injection">Prompt Injection</a></li>
+<li><a href="/agent-security/tool-use">Tool Use Security</a></li>
+</ul></nav>
+</aside>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="/">Home</a> / <a href="/fundamentals">Fundamentals</a> / Security Frameworks</div>
+
+    <div class="page-header">
+      <div class="page-meta">
+        <span class="badge badge-beginner">Beginner</span>
+        <span>⏱ 10–15 min read</span>
+        <span>📅 Updated Dec 2025</span>
+      </div>
+      <h1>AI Security Frameworks</h1>
+      <p style="margin-top:0.75rem;color:#333;">Hero Section</p>
+    </div>
+
+    <div class='summary-box'><h3>What You'll Learn</h3><ul><li>Key Characteristics</li><li>When to Use NIST AI RMF</li><li>Building an AI governance program from scratch</li><li>Aligning AI practices across a large organization</li><li>MITRE ATLAS</li></ul></div>
+
+    <p>Securing AI systems requires more than good intentions—it requires structure. Security frameworks provide that structure, offering standardized approaches to identifying risks, implementing controls, and measuring progress. The challenge is that AI security is a new discipline. Traditional frameworks like NIST Cybersecurity Framework and ISO 27001 remain valuable but don&#x27;t address AI-specific threats like prompt injection, model manipulation, or agent hijacking. A new generation of frameworks has emerged to fill this gap. This guide covers the major frameworks shaping AI security practice today and how organizations can apply them. NIST AI Risk Management Framework (AI RMF) The National Institute of Standards and Technology released the AI RMF in January 2023 as a voluntary framework for managing AI risks throughout the AI lifecycle. It has quickly become a foundational reference for organizations building AI governance programs. We can do an ai video explaining each one – instead of text, this would go on the video below 👇 Framework Structure – ASSET SHOWING EACH WORD The AI RMF is organized around four core functions: Govern establishes the organizational context for AI risk management. This includes defining roles and responsibilities, establishing policies, creating accountability structures, and fostering a culture that prioritizes trustworthy AI. Governance isn&#x27;t a one-time setup—it requires ongoing attention as AI capabilities and risks evolve. Map focuses on understanding the context in which AI systems operate. This means identifying stakeholders, defining intended uses, recognizing potential harms, and cataloging the data, models, and infrastructure involved. You can&#x27;t manage risks you haven&#x27;t identified. Measure involves assessing and tracking AI risks using quantitative and qualitative methods. This includes testing for vulnerabilities, evaluating model performance, monitoring for bias and drift, and establishing metrics that indicate whether AI systems are behaving as intended. Manage addresses how organizations prioritize and act on identified risks. This includes implementing controls, allocating resources, planning responses to incidents, and continuously improving based on lessons learned.</p>
+
+    <h2 id="key-characteristics">Key Characteristics</h2>
+<p>The AI RMF is risk-based, not prescriptive. It doesn&#x27;t mandate specific controls but provides a structure for organizations to make informed decisions based on their context. This flexibility is both a strength and a challenge—organizations must determine how to apply the framework to their specific situation.</p>
+<p>The framework emphasizes trustworthiness across seven dimensions: safety, security, accountability, transparency, explainability, privacy, and fairness. Security is one piece of a broader picture.</p>
+<h2 id="when-to-use-nist-ai-rmf">When to Use NIST AI RMF</h2>
+
+<h2 id="building-an-ai-governance-program-from-scratch">Building an AI governance program from scratch</h2>
+<p>Demonstrating AI risk management to regulators or stakeholders</p>
+<h2 id="aligning-ai-practices-across-a-large-organization">Aligning AI practices across a large organization</h2>
+<p>Establishing a common vocabulary for AI risk discussions</p>
+<h2 id="mitre-atlas">MITRE ATLAS</h2>
+<p>MITRE ATLAS (Adversarial Threat Landscape for Artificial‑Intelligence Systems) is a knowledge base of real and theoretical attack techniques against AI, inspired by the structure of MITRE ATT&amp;CK. It focuses specifically on how adversaries can target models, data, and ML pipelines.</p>
+<h2 id="atlas-gives-defenders">ATLAS gives defenders:</h2>
+<p>A catalog of attack techniques, from data poisoning and model theft to query‑based extraction and evasion.</p>
+<p>Example case studies and kill chains that show how techniques combine into full attack paths.</p>
+<p>A common language to use when designing detections, controls, and red‑teaming plans for AI systems.</p>
+<p>Mirror Academy’s threat and testing content can be mapped back to ATLAS techniques to help teams show coverage and identify gaps in their AI defenses.</p>
+<h2 id="iso-42001">ISO 42001</h2>
+<p>ISO/IEC 42001 is an international management standard for AI, focused on building an AI Management System (AIMS) like how ISO 27001 structures an information security management system. It addresses governance, risk, and operational controls for AI use in organizations.</p>
+<h2 id="key-ideas-in-iso-42001-include">Key ideas in ISO 42001 include:</h2>
+<p>Establishing objectives, policies, and responsibilities for AI within the organization.</p>
+<p>Managing risks related to safety, security, privacy, fairness, and transparency across the AI lifecycle.</p>
+<p>Integrating AI risk management with existing management systems (such as ISO 27001 or ISO 27701).</p>
+<p>Security leaders can use ISO 42001 to anchor AI security work in a recognized standard, especially when customers, regulators, or partners expect formal certification.</p>
+<h2 id="owasp-for-llms">OWASP for LLMs</h2>
+<p>OWASP’s work on large language models provides a security and privacy guide, plus a Top‑10 style list of common risks for LLM applications. It adapts application‑security thinking to LLM‑specific threats like prompt injection and model‑driven data leakage.</p>
+<h2 id="typical-coverage-includes">Typical coverage includes:</h2>
+<p>Misuse patterns such as prompt injection, insecure plug‑ins, excessive data collection, and lack of output filtering.</p>
+<p>Practical recommendations for input validation, context management, tool permissioning, logging, and abuse detection.</p>
+<p>Checklists and testing ideas that teams can apply directly to chatbots, RAG systems, and AI agents.</p>
+<p>OWASP resources are especially helpful for developers and AppSec engineers who already know web and API security and need a concrete starting point for LLM security.</p>
+<h2 id="industryspecific-frameworks">Industry‑specific frameworks</h2>
+<p>Beyond general AI frameworks, many sectors are developing their own guidance or adapting existing rules to AI use:</p>
+<p>Financial services: Supervisory bodies and standard‑setters link AI controls to model risk management, anti‑fraud measures, and explainability expectations for credit, trading, and AML systems.</p>
+<p>Healthcare: AI guidance is tied to patient safety, clinical validation, and privacy frameworks like HIPAA, with emphasis on data governance and model performance monitoring.</p>
+<p>Public sector and critical infrastructure: Policies connect AI security to national cybersecurity strategies, supply‑chain assurance, and resilience requirements for critical services.</p>
+<p>Cloud and SaaS platforms: Providers publish AI security baselines that map their controls to NIST, ISO, and sector‑specific expectations, helping customers build shared responsibility models.</p>
+<p>When designing an AI security program, organizations typically start from a general framework (NIST AI RMF or ISO 42001), then layer on ATLAS, OWASP LLM guidance, and any sector‑specific rules relevant to their products and data.</p>
+<h2 id="banner-with-cta">Banner with CTA</h2>
+<div class="callout info-callout"><div class="callout-title">🎨 Asset</div><p>[ASSET: CTA Button]</p></div>
+<p>Primary CTA: &quot;Get a Demo&quot; or &quot;Start with a Risk Assessment&quot; - https://mirrorsecurity.io/riskreport</p>
+<p>Secondary CTA: &quot;Explore Mirror Academy&quot; (links to course overview)</p>
+<h2 id="continue-learning">Continue Learning</h2>
+<ul><li>Getting Started Guide</li></ul>
+
+    <div class="cta-box" id="start-securing">
+      <h3>Start securing your AI systems</h3>
+      <p>AI adoption is accelerating, and so are the threats. Build security into your AI stack from day one.</p>
+      <a class="cta-button" href="https://mirrorsecurity.io/riskreport">Start with a Risk Assessment</a>
+    </div>
+
+    <div class="key-takeaways" id="key-takeaways">
+      <h3>Key takeaways</h3>
+      <ul>
+        <li>AI security protects data, models, and AI usage across the full lifecycle.</li>
+        <li>Most AI incidents chain multiple weaknesses, so defenses should be layered.</li>
+        <li>Logging, least privilege, and continuous testing are the fastest wins.</li>
+      </ul>
+    </div>
+
+    <div class="navigation-buttons">
+      <a class="nav-button prev" href="/fundamentals">← Back to Fundamentals</a>
+      <a class="nav-button" href="/learning-paths">View Learning Paths →</a>
+    </div>
+  </main>
+
+  <aside class="sidebar-right">
+
+        <div class="ai-summary-section">
+            <h4>✨ Quick Summary</h4>
+            <p>A guide to the main AI security frameworks like NIST AI RMF, MITRE ATLAS, ISO 42001, and OWASP for LLMs.</p>
+            <div class="ai-buttons">
+                <a class="ai-button" href="#key-takeaways"><span class="ai-icon">🧠</span>Key takeaways</a>
+                <a class="ai-button" href="#start-securing"><span class="ai-icon">🛡️</span>Next steps</a>
+            </div>
+        </div>
+<div class="toc"><h4>On this page</h4><ul>
+<li><a href="#key-characteristics">Key Characteristics</a></li>
+<li><a href="#when-to-use-nist-ai-rmf">When to Use NIST AI RMF</a></li>
+<li><a href="#building-an-ai-governance-program-from-scratch">Building an AI governance program from scratch</a></li>
+<li><a href="#aligning-ai-practices-across-a-large-organization">Aligning AI practices across a large organization</a></li>
+<li><a href="#mitre-atlas">MITRE ATLAS</a></li>
+<li><a href="#atlas-gives-defenders">ATLAS gives defenders:</a></li>
+<li><a href="#iso-42001">ISO 42001</a></li>
+<li><a href="#key-ideas-in-iso-42001-include">Key ideas in ISO 42001 include:</a></li>
+<li><a href="#owasp-for-llms">OWASP for LLMs</a></li>
+<li><a href="#typical-coverage-includes">Typical coverage includes:</a></li>
+<li><a href="#industryspecific-frameworks">Industry‑specific frameworks</a></li>
+<li><a href="#banner-with-cta">Banner with CTA</a></li>
+<li><a href="#continue-learning">Continue Learning</a></li>
+</ul></div>
+<div class="related-links"><h4>Continue learning</h4>
+<a href="/fundamentals/intro-to-ai-security">Introduction to AI Security</a>
+<a href="/fundamentals/ai-vs-traditional-security">AI vs Traditional Security</a>
+<a href="/fundamentals/threat-landscape">Threat Landscape</a>
+<a href="/fundamentals/security-frameworks">Security Frameworks</a>
+<a href="/fundamentals/getting-started">Getting Started Guide</a>
+</div>
+</aside>
+</div>
+
+
+    <script>
+    const tocLinks = Array.from(document.querySelectorAll('.toc a'));
+    const sections = tocLinks.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+    const setActive = () => {
+      let current = sections[0];
+      for (const s of sections) {
+        const r = s.getBoundingClientRect();
+        if (r.top <= 120) current = s;
+      }
+      tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+    };
+    document.addEventListener('scroll', setActive, {passive:true});
+    setActive();
+    </script>
+    
+</body>
+</html>

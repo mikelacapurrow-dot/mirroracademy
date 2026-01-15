@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <meta name="description" content="Explore the AI threat landscape including prompt injection, data leakage, model manipulation, supply chain risk, and adversarial testing.">
+    <meta name="keywords" content="AI threat landscape, prompt injection, data leakage, model manipulation, AI red teaming, adversarial testing">
+    <title>Threat Landscape | Mirror Labs</title>
+    <meta property="og:title" content="Threat Landscape | Mirror Labs">
+    <meta property="og:description" content="Explore the AI threat landscape including prompt injection, data leakage, model manipulation, supply chain risk, and adversarial testing.">
+    <meta property="og:type" content="article">
+    
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+        
+        /* Header */
+        header {
+            background: #0a0a0a;
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+        }
+        
+        nav a {
+            color: #999;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: white;
+        }
+        
+        /* Layout Container */
+        .page-container {
+            display: grid;
+            grid-template-columns: 250px 1fr 200px;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 3rem;
+            padding: 2rem;
+        }
+        
+        /* Left Sidebar */
+        .sidebar-left {
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 100px);
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+        
+        .sidebar-left h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+        
+        .nav-section ul {
+            list-style: none;
+        }
+        
+        .nav-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-section a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        .nav-section a:hover {
+            color: #000;
+            background: #f5f5f5;
+        }
+        
+        .nav-section a.active {
+            color: #000;
+            background: #e8e8e8;
+            font-weight: 500;
+        }
+        
+        .progress-indicator {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f8f8f8;
+            border-radius: 8px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin: 0.5rem 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0066ff, #00ccff);
+            width: 100%;
+            transition: width 0.3s;
+        }
+        
+        .progress-text {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        /* Main Content */
+        .main-content {
+            max-width: 800px;
+        }
+        
+        .breadcrumb {
+            font-size: 0.875rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            color: #000;
+        }
+        
+        .page-header {
+            margin-bottom: 2rem;
+        }
+        
+        .page-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            color: #666;
+        }
+        
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .badge-beginner {
+            background: #e6f7e6;
+            color: #0d8a0d;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .summary-box {
+            background: #f8f9fa;
+            border-left: 4px solid #0066ff;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        
+        .summary-box h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .summary-box ul {
+            list-style: none;
+        }
+        
+        .summary-box li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        
+        .summary-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #0066ff;
+            font-weight: bold;
+        }
+        
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin: 3rem 0 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e8e8e8;
+        }
+        
+        h2:first-of-type {
+            border-top: none;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+        }
+        
+        p {
+            margin-bottom: 1.25rem;
+            color: #333;
+        }
+        
+        strong {
+            font-weight: 600;
+            color: #000;
+        }
+        
+        ul, ol {
+            margin-bottom: 1.25rem;
+            padding-left: 2rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .callout {
+            background: #fff8e6;
+            border-left: 4px solid #ffb800;
+            padding: 1.25rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .info-callout {
+            background: #e6f7ff;
+            border-left: 4px solid #0066ff;
+        }
+        
+        .success-callout {
+            background: #e6f7e6;
+            border-left: 4px solid #0d8a0d;
+        }
+        
+        .step-card {
+            background: white;
+            border: 2px solid #e8e8e8;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            transition: all 0.3s;
+        }
+        
+        .step-card:hover {
+            border-color: #0066ff;
+            box-shadow: 0 8px 24px rgba(0, 102, 255, 0.12);
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #0066ff, #00ccff);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .step-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .step-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem;
+            color: #0066ff;
+        }
+        
+        .checklist {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .checklist ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
+        
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            color: #0066ff;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .tool-card {
+            background: white;
+            border: 1px solid #e8e8e8;
+            padding: 1.25rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        
+        .tool-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-color: #0066ff;
+        }
+        
+        .tool-name {
+            font-weight: 600;
+            color: #0066ff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tool-description {
+            font-size: 0.875rem;
+            color: #666;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .timeline:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #0066ff, #00ccff);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: -2.5rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #0066ff;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #0066ff;
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+            color: #0066ff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .key-takeaways {
+            background: #f0f7ff;
+            border: 1px solid #b3d9ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+        }
+        
+        .key-takeaways h3 {
+            margin-top: 0;
+            color: #0066ff;
+        }
+        
+        .key-takeaways ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .key-takeaways li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+        
+        .key-takeaways li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #0066ff;
+            font-weight: bold;
+        }
+        
+        .cta-box {
+            background: linear-gradient(135deg, #0066ff, #00ccff);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .cta-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-box p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: white;
+            color: #0066ff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 3rem 0;
+            padding-top: 2rem;
+            border-top: 1px solid #e8e8e8;
+        }
+        
+        .nav-button {
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            color: white;
+            background: #0066ff;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        
+        .nav-button:hover {
+            background: #0052cc;
+        }
+        
+        .nav-button.prev {
+            background: #666;
+        }
+        
+        .nav-button.prev:hover {
+            background: #444;
+        }
+        
+        /* Right Sidebar */
+        .sidebar-right {
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 100px);
+            font-size: 0.875rem;
+        }
+        
+        .toc {
+            margin-bottom: 2rem;
+        }
+        
+        .toc h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .toc a {
+            color: #666;
+            text-decoration: none;
+            display: block;
+            transition: color 0.2s;
+        }
+        
+        .toc a:hover {
+            color: #000;
+        }
+        
+        .toc a.active {
+            color: #0066ff;
+            font-weight: 500;
+        }
+        
+        /* AI Summary Section */
+        .ai-summary-section {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .ai-summary-section h4 {
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .ai-summary-section p {
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        
+        .ai-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+        
+        .ai-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.6rem;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .ai-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .ai-icon {
+            font-size: 16px;
+        }
+        
+        .related-links {
+            margin-top: 2rem;
+        }
+        
+        .related-links h4 {
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .related-links a {
+            display: block;
+            color: #0066ff;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+        }
+        
+        .related-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .page-container {
+                grid-template-columns: 200px 1fr;
+            }
+            
+            .sidebar-right {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .page-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar-left {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .ai-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <a href="/" class="logo">Mirror Labs</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/fundamentals">Docs</a>
+      <a href="/learning-paths">Learning Paths</a>
+      <a href="https://mirrorsecurity.io">Mirror Security</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-container">
+  <aside class="sidebar-left">
+<nav class="nav-section"><h3>Fundamentals</h3><ul>
+<li><a href="/fundamentals/intro-to-ai-security">Introduction to AI Security</a></li>
+<li><a href="/fundamentals/ai-vs-traditional-security">AI vs Traditional Security</a></li>
+<li><a href="/fundamentals/threat-landscape" class="active">Threat Landscape</a></li>
+<li><a href="/fundamentals/security-frameworks">Security Frameworks</a></li>
+<li><a href="/fundamentals/getting-started">Getting Started Guide</a></li>
+</ul></nav>
+<nav class="nav-section"><h3>Vector Database Security</h3><ul>
+<li><a href="/vector-db/architecture">Architecture</a></li>
+<li><a href="/vector-db/vulnerabilities">Common Vulnerabilities</a></li>
+<li><a href="/vector-db/encryption">Encryption Methods</a></li>
+</ul></nav>
+<nav class="nav-section"><h3>AI Agent Security</h3><ul>
+<li><a href="/agent-security/architecture">Agent Architecture</a></li>
+<li><a href="/agent-security/prompt-injection">Prompt Injection</a></li>
+<li><a href="/agent-security/tool-use">Tool Use Security</a></li>
+</ul></nav>
+</aside>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="/">Home</a> / <a href="/fundamentals">Fundamentals</a> / Threat Landscape</div>
+
+    <div class="page-header">
+      <div class="page-meta">
+        <span class="badge badge-beginner">Beginner</span>
+        <span>⏱ 10–15 min read</span>
+        <span>📅 Updated Dec 2025</span>
+      </div>
+      <h1>Threat Landscape</h1>
+      <p style="margin-top:0.75rem;color:#333;">Hero Section</p>
+    </div>
+
+    <div class='summary-box'><h3>What You'll Learn</h3><ul><li>Prompt Injection</li><li>Data leakage</li><li>Asset: infographics with four different levels</li><li>Common leakage paths include:</li><li>Examples of data at risk:</li></ul></div>
+
+    <p>As AI systems move into production, they create a new class of security risks that traditional controls struggle to see and stop. Understanding the AI threat landscape is the foundation for designing guardrails, monitoring, and response processes that actually match how modern AI is attacked and abused. Why the AI threat landscape is different AI systems are probabilistic, data-hungry, and deeply integrated with other tools, which means small changes in input or context can drive big changes in behavior. The same model that answers harmless questions can, under the right conditions, leak sensitive data, break policy, or perform unintended actions through tools and agents. Attackers also benefit from AI: they can automate content generation, speed up reconnaissance, and craft prompts or inputs specifically designed to confuse or mislead models. The result is a fast-moving threat landscape where new techniques emerge quickly and often look like “normal” usage from the outside.</p>
+
+    <h2 id="prompt-injection">Prompt Injection</h2>
+<p>Prompt injection is the most prevalent and dangerous threat to AI systems. It occurs when an attacker crafts input that causes an AI to ignore its original instructions and follow malicious commands instead.</p>
+<p>Attackers also benefit from AI: they can automate content generation, speed up reconnaissance, and craft prompts or inputs specifically designed to confuse or mislead models. The result is a fast-moving threat landscape where new techniques emerge quickly and often look like “normal” usage from the outside.</p>
+<h2 id="data-leakage">Data leakage</h2>
+<p>Data leakage is the unintended exposure of sensitive information through AI systems. This can happen even if the underlying infrastructure is otherwise secure.</p>
+<h2 id="asset-infographics-with-four-different-levels">Asset: infographics with four different levels</h2>
+
+<h2 id="common-leakage-paths-include">Common leakage paths include:</h2>
+<p>Model outputs: The model repeats or closely paraphrases sensitive training or prompt data when asked the right questions.</p>
+<p>Logs and telemetry: Prompts, responses, and tool parameters are captured in logs without redaction or access control.</p>
+<p>Embeddings and vector databases: Sensitive text is converted into embeddings and stored, but access control is weak or missing.</p>
+<p>Third-party tools and APIs: Data sent to external services as part of an AI workflow is not adequately governed or masked.</p>
+<h2 id="examples-of-data-at-risk">Examples of data at risk:</h2>
+<p>Personally identifiable information (PII) and health data.</p>
+<p>Source code, configuration files, and secrets.</p>
+<p>Contracts, roadmaps, incident reports, and internal strategy documents.</p>
+<h2 id="data-leakage-risk-grows-as">Data leakage risk grows as:</h2>
+<p>More teams integrate AI into workflows without centralized review.</p>
+<p>Shadow AI and unmanaged third-party tools appear.</p>
+<p>Logs and debug traces are shared broadly for troubleshooting or analytics.</p>
+<h2 id="model-manipulation">Model manipulation</h2>
+<p>Model manipulation covers attacks that change how a model behaves, often in subtle, targeted ways that are hard to detect.</p>
+<h2 id="asset-key-forms-include">ASSET Key forms include:</h2>
+<p>Training data poisoning: Attackers inject malicious or biased data into training or fine-tuning datasets, so the model behaves incorrectly in specific situations.</p>
+<p>RAG and context poisoning: Malicious or incorrect documents enter the retrieval index, causing the model to pull and trust bad information.</p>
+<p>Configuration and prompt tampering: System prompts, safety policies, or configuration parameters are changed without proper control or review.</p>
+<p>Model theft and cloning: Attackers extract model parameters or replicate behavior to study weaknesses or reuse the model elsewhere.</p>
+<p>The impact of model manipulation can range from:</p>
+<p>Targeted misclassification or bad recommendations.</p>
+<p>Quiet backdoors that trigger harmful responses only under certain conditions.</p>
+<p>Systematic erosion of trust in AI outputs over time.</p>
+<p>Unlike classic exploits, model manipulation often looks like “just another output” until someone notices a pattern or a high-impact incident.</p>
+<h2 id="supply-chain-risks">Supply Chain Risks</h2>
+<p>AI systems depend on a deep and evolving supply chain: open-source models, pre-trained checkpoints, third-party APIs, SaaS platforms, datasets, and SDKs. Each link introduces potential compromise.</p>
+<h2 id="typical-supply-chain-risk-areas">Typical supply chain risk areas:</h2>
+<p>Model repositories: Malicious or backdoored models posted under trusted or lookalike names.</p>
+<p>Datasets and benchmarks: Public datasets that contain poisoned or inappropriate content.</p>
+<p>Libraries and frameworks: Vulnerabilities or malicious code in ML libraries, orchestration frameworks, or agent toolkits.</p>
+<p>Third-party AI services: Hosted models, plugins, and integrations that have their own security posture and data handling practices.</p>
+<p>Infrastructure providers: Vector databases, storage, and hosting services with misconfigurations or weak isolation.</p>
+<p>Because organizations often stack multiple third-party components together, a single compromised provider can create high-impact, multi-customer incidents. Managing AI supply chain risk means treating models, datasets, and tooling with the same scrutiny already applied to open-source software and cloud services.</p>
+<h2 id="adversarial-testing">Adversarial testing</h2>
+<p>Adversarial testing is the practice of probing AI systems with intentionally difficult or hostile inputs to discover weaknesses before attackers do. It is how mature teams map and track the AI threat landscape inside their own environments.</p>
+<h2 id="adversarial-testing-can-include">Adversarial testing can include:</h2>
+<p>Red-teaming with prompts: Systematically testing for jailbreaks, prompt injection, policy bypasses, and data leakage.</p>
+<p>Automated fuzzing of prompts and tools: Generating large volumes of varied inputs to see where models misbehave.</p>
+<p>Adversarial examples for ML models: Crafting inputs that cause misclassification or bad decisions while looking benign to humans.</p>
+<p>Scenario-based exercises: Simulating realistic attacker goals (e.g., “exfiltrate customer data via the chatbot”) and measuring how far a team can get.</p>
+<h2 id="effective-adversarial-testing">Effective adversarial testing:</h2>
+<p>Produces structured findings, not just screenshots (e.g., attack paths, required preconditions, impact, and recommended mitigations).</p>
+<p>Integrates with development and deployment pipelines so new releases are tested by default.</p>
+<p>Feeds into guardrail design, monitoring rules, and incident playbooks.</p>
+<p>Rather than treating adversarial testing as a one-off project, teams should see it as an ongoing capability that evolves with their AI stack and the external threat landscape.</p>
+<h2 id="how-these-threats-connect">How these threats connect</h2>
+<p>These categories rarely appear in isolation. In a real incident, a single attack path might:</p>
+<p>Start with prompt injection.</p>
+<p>Cause data leakage.</p>
+<p>Exploit a poisoned document or third-party model (supply chain).</p>
+<p>Reveal a gap that adversarial testing would have caught.</p>
+<p>Understanding prompt injection, data leakage, model manipulation, supply chain risks, and adversarial testing as a connected system helps teams design layered defenses instead of isolated patches.</p>
+<h2 id="banner-with-cta">Banner with CTA</h2>
+<div class="callout info-callout"><div class="callout-title">🎨 Asset</div><p>[ASSET: CTA Button]</p></div>
+<p>Primary CTA: &quot;Get a Demo&quot; or &quot;Start with a Risk Assessment&quot; - https://mirrorsecurity.io/riskreport</p>
+<p>Secondary CTA: &quot;Explore Mirror Academy&quot; (links to course overview)</p>
+<h2 id="continue-learning">Continue Learning</h2>
+<ul><li>Security Frameworks for AI</li><li>Getting Started Guide</li></ul>
+
+    <div class="cta-box" id="start-securing">
+      <h3>Start securing your AI systems</h3>
+      <p>AI adoption is accelerating, and so are the threats. Build security into your AI stack from day one.</p>
+      <a class="cta-button" href="https://mirrorsecurity.io/riskreport">Start with a Risk Assessment</a>
+    </div>
+
+    <div class="key-takeaways" id="key-takeaways">
+      <h3>Key takeaways</h3>
+      <ul>
+        <li>AI security protects data, models, and AI usage across the full lifecycle.</li>
+        <li>Most AI incidents chain multiple weaknesses, so defenses should be layered.</li>
+        <li>Logging, least privilege, and continuous testing are the fastest wins.</li>
+      </ul>
+    </div>
+
+    <div class="navigation-buttons">
+      <a class="nav-button prev" href="/fundamentals">← Back to Fundamentals</a>
+      <a class="nav-button" href="/learning-paths">View Learning Paths →</a>
+    </div>
+  </main>
+
+  <aside class="sidebar-right">
+
+        <div class="ai-summary-section">
+            <h4>✨ Quick Summary</h4>
+            <p>Explore the AI threat landscape including prompt injection, data leakage, model manipulation, supply chain risk, and adversarial testing.</p>
+            <div class="ai-buttons">
+                <a class="ai-button" href="#key-takeaways"><span class="ai-icon">🧠</span>Key takeaways</a>
+                <a class="ai-button" href="#start-securing"><span class="ai-icon">🛡️</span>Next steps</a>
+            </div>
+        </div>
+<div class="toc"><h4>On this page</h4><ul>
+<li><a href="#prompt-injection">Prompt Injection</a></li>
+<li><a href="#data-leakage">Data leakage</a></li>
+<li><a href="#asset-infographics-with-four-different-levels">Asset: infographics with four different levels</a></li>
+<li><a href="#common-leakage-paths-include">Common leakage paths include:</a></li>
+<li><a href="#examples-of-data-at-risk">Examples of data at risk:</a></li>
+<li><a href="#data-leakage-risk-grows-as">Data leakage risk grows as:</a></li>
+<li><a href="#model-manipulation">Model manipulation</a></li>
+<li><a href="#asset-key-forms-include">ASSET Key forms include:</a></li>
+<li><a href="#supply-chain-risks">Supply Chain Risks</a></li>
+<li><a href="#typical-supply-chain-risk-areas">Typical supply chain risk areas:</a></li>
+<li><a href="#adversarial-testing">Adversarial testing</a></li>
+<li><a href="#adversarial-testing-can-include">Adversarial testing can include:</a></li>
+<li><a href="#effective-adversarial-testing">Effective adversarial testing:</a></li>
+<li><a href="#how-these-threats-connect">How these threats connect</a></li>
+<li><a href="#banner-with-cta">Banner with CTA</a></li>
+<li><a href="#continue-learning">Continue Learning</a></li>
+</ul></div>
+<div class="related-links"><h4>Continue learning</h4>
+<a href="/fundamentals/intro-to-ai-security">Introduction to AI Security</a>
+<a href="/fundamentals/ai-vs-traditional-security">AI vs Traditional Security</a>
+<a href="/fundamentals/threat-landscape">Threat Landscape</a>
+<a href="/fundamentals/security-frameworks">Security Frameworks</a>
+<a href="/fundamentals/getting-started">Getting Started Guide</a>
+</div>
+</aside>
+</div>
+
+
+    <script>
+    const tocLinks = Array.from(document.querySelectorAll('.toc a'));
+    const sections = tocLinks.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+    const setActive = () => {
+      let current = sections[0];
+      for (const s of sections) {
+        const r = s.getBoundingClientRect();
+        if (r.top <= 120) current = s;
+      }
+      tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
+    };
+    document.addEventListener('scroll', setActive, {passive:true});
+    setActive();
+    </script>
+    
+</body>
+</html>
