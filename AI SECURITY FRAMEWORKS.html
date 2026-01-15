@@ -1,0 +1,219 @@
+<!-- =========================
+PAGE 4: AI SECURITY FRAMEWORKS
+Source: AI Security Frameworks.docx
+========================= -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Security Frameworks | Mirror Academy</title>
+  <meta name="description" content="A practical guide to AI security frameworks: NIST AI RMF, MITRE ATLAS, ISO/IEC 42001, OWASP for LLMs, and industry-specific guidance. Learn when to use each." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://mirrorsecurity.io/mirror-academy/ai-security-fundamentals/security-frameworks" />
+
+  <meta property="og:title" content="AI Security Frameworks | Mirror Academy" />
+  <meta property="og:description" content="Frameworks that bring structure to AI security: NIST AI RMF, MITRE ATLAS, ISO 42001, and OWASP for LLMs." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://mirrorsecurity.io/mirror-academy/ai-security-fundamentals/security-frameworks" />
+  <meta property="og:image" content="https://mirrorsecurity.io/assets/academy/frameworks-hero.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"AI Security Frameworks",
+    "description":"A practical guide to the major frameworks shaping AI security practice today and how to apply them.",
+    "author":{"@type":"Organization","name":"Mirror Security"},
+    "publisher":{"@type":"Organization","name":"Mirror Security"},
+    "mainEntityOfPage":"https://mirrorsecurity.io/mirror-academy/ai-security-fundamentals/security-frameworks"
+  }
+  </script>
+
+  <style>
+    :root{--bg:#0b0f14;--muted:#9fb0c3;--text:#eaf2ff;--brand:#7ee0ff;--brand2:#a78bfa;--line:rgba(255,255,255,.10)}
+    *{box-sizing:border-box} body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial; background:radial-gradient(1200px 600px at 10% 0%, rgba(126,224,255,.15), transparent 60%), radial-gradient(900px 600px at 90% 10%, rgba(167,139,250,.12), transparent 60%), var(--bg); color:var(--text); line-height:1.55}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+    .container{max-width:1100px;margin:0 auto;padding:28px 18px 80px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0 18px;border-bottom:1px solid var(--line)}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800}
+    .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.04);color:var(--muted);font-size:13px}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;padding:26px 0}
+    .hero h1{font-size:38px;line-height:1.1;margin:0 0 12px}
+    .hero p{margin:0 0 18px;color:var(--muted);font-size:16px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);font-weight:700}
+    .btn.primary{background:linear-gradient(135deg, rgba(126,224,255,.22), rgba(167,139,250,.22));border-color:rgba(255,255,255,.18)}
+    .btn:hover{filter:brightness(1.06)}
+    .card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:18px;padding:16px}
+    .grid{display:grid;gap:14px}
+    .grid.cols2{grid-template-columns:repeat(2, minmax(0, 1fr))}
+    .grid.cols3{grid-template-columns:repeat(3, minmax(0, 1fr))}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.grid.cols2,.grid.cols3{grid-template-columns:1fr}}
+    h2{font-size:22px;margin:28px 0 10px}
+    h3{font-size:16px;margin:0 0 6px}
+    .muted{color:var(--muted)}
+    .row{display:flex;gap:12px;align-items:flex-start}
+    .icon{width:34px;height:34px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);display:grid;place-items:center;flex:0 0 auto}
+    .accordion details{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:rgba(255,255,255,.03)}
+    .accordion details + details{margin-top:10px}
+    .accordion summary{cursor:pointer;font-weight:800}
+    .hr{height:1px;background:var(--line);margin:18px 0}
+    .mini{font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <!-- ASSET: Logo -->
+        <span style="display:inline-grid;place-items:center;width:34px;height:34px;border-radius:12px;background:rgba(126,224,255,.18);border:1px solid rgba(255,255,255,.14);font-weight:900">M</span>
+        <span>Mirror Academy</span>
+      </div>
+      <div class="pill"><span>AI Security Fundamentals</span><span style="opacity:.5">•</span><span>Module 4</span></div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1>AI Security Frameworks</h1>
+        <p>
+          Securing AI systems requires structure. Frameworks provide standardized approaches to identify risks, implement controls, and measure progress.
+          This module covers the major frameworks shaping AI security today and how to apply them.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <a class="btn primary" href="https://mirrorsecurity.io/riskreport">Start with a Risk Assessment</a>
+          <a class="btn" href="#nist">Start with NIST AI RMF</a>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h3 style="margin-top:0">Why new frameworks exist</h3>
+        <p class="muted" style="margin:0">
+          Traditional frameworks (like NIST CSF and ISO 27001) remain valuable, but do not fully address AI-specific threats like prompt injection,
+          model manipulation, and agent hijacking. AI-focused frameworks fill those gaps.
+        </p>
+      </aside>
+    </section>
+
+    <section id="nist">
+      <h2>NIST AI Risk Management Framework (AI RMF)</h2>
+
+      <!-- ASSET: Video block explaining NIST AI RMF (preferred over text) -->
+      <div class="card">
+        <div class="row">
+          <div class="icon">🎥</div>
+          <div>
+            <strong>Video explainer (recommended)</strong>
+            <div class="muted mini">
+              Replace the text-heavy section with a short video that explains the AI RMF and how to use it in a real org.
+            </div>
+            <!-- Example embed placeholder -->
+            <div style="margin-top:12px;border:1px solid rgba(255,255,255,.12);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.02)">
+              <div style="padding:12px" class="muted mini">
+                Video placeholder: /assets/academy/videos/nist-ai-rmf.mp4
+              </div>
+              <div style="height:260px;display:grid;place-items:center;color:rgba(255,255,255,.35)">
+                (Video Embed)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ASSET: Framework structure graphic showing the four functions -->
+      <div class="grid cols2" style="margin-top:14px">
+        <div class="card">
+          <h3 style="margin-top:0">Framework structure</h3>
+          <p class="muted">
+            The AI RMF is organized around four core functions that help teams build governance and controls across the AI lifecycle.
+          </p>
+          <div class="row"><div class="icon">🏛️</div><div><strong>Govern</strong><div class="muted mini">Define roles, policies, accountability, and culture for trustworthy AI.</div></div></div>
+          <div class="row"><div class="icon">🗺️</div><div><strong>Map</strong><div class="muted mini">Identify stakeholders, intended use, harms, and inventory data, models, infra.</div></div></div>
+          <div class="row"><div class="icon">📏</div><div><strong>Measure</strong><div class="muted mini">Assess risks, test vulnerabilities, track drift, bias, and behavior metrics.</div></div></div>
+          <div class="row"><div class="icon">🧯</div><div><strong>Manage</strong><div class="muted mini">Prioritize and act: controls, resources, incident plans, continuous improvement.</div></div></div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-top:0">Key characteristics</h3>
+          <ul class="muted" style="margin:0;padding-left:18px">
+            <li>Risk-based, not prescriptive. It gives structure, but you choose controls.</li>
+            <li>Emphasizes trustworthiness across seven dimensions: safety, security, accountability, transparency, explainability, privacy, and fairness.</li>
+          </ul>
+
+          <div class="hr"></div>
+          <h3>When to use NIST AI RMF</h3>
+          <ul class="muted" style="margin:0;padding-left:18px">
+            <li>Building AI governance from scratch</li>
+            <li>Demonstrating risk management to regulators or stakeholders</li>
+            <li>Aligning practices across a large organization</li>
+            <li>Establishing shared vocabulary for AI risk discussions</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>MITRE ATLAS</h2>
+      <div class="card">
+        <p class="muted" style="margin:0">
+          MITRE ATLAS is a knowledge base of real and theoretical attack techniques against AI, inspired by MITRE ATT&CK.
+          It gives defenders a catalog of techniques, case studies and kill chains, plus a common language for detections, controls, and red-teaming.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>ISO/IEC 42001</h2>
+      <div class="card">
+        <p class="muted" style="margin:0">
+          ISO/IEC 42001 is an AI management standard focused on building an AI Management System (AIMS), similar to how ISO 27001 structures an ISMS.
+          It anchors AI security work in a recognized standard when customers, regulators, or partners expect formal governance.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>OWASP for LLMs</h2>
+      <div class="card">
+        <p class="muted" style="margin:0">
+          OWASP’s LLM work adapts application security to LLM-specific threats like prompt injection and model-driven data leakage.
+          It is especially helpful for developers and AppSec teams who want practical checklists and testing ideas.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Industry-specific frameworks</h2>
+      <div class="grid cols2">
+        <div class="card">
+          <h3 style="margin-top:0">Financial services</h3>
+          <p class="muted">Controls tie to model risk management, anti-fraud, and explainability expectations for credit, trading, and AML.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Healthcare</h3>
+          <p class="muted">Guidance ties to patient safety, clinical validation, and privacy, with emphasis on governance and monitoring.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Public sector and critical infrastructure</h3>
+          <p class="muted">Policies connect AI security to national strategies, supply chain assurance, and resilience requirements.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Cloud and SaaS platforms</h3>
+          <p class="muted">Providers publish baselines mapping controls to NIST, ISO, and sector expectations for shared responsibility.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:26px">
+      <h2 style="margin-top:0">Start securing your AI systems</h2>
+      <p class="muted">
+        When designing an AI security program, teams often start with a general framework (NIST AI RMF or ISO 42001),
+        then layer on ATLAS, OWASP LLM guidance, and sector rules relevant to their products and data.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <a class="btn primary" href="https://mirrorsecurity.io/riskreport">Start with a Risk Assessment</a>
+        <a class="btn" href="/mirror-academy/ai-security-fundamentals/getting-started">Next: Getting Started Guide</a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

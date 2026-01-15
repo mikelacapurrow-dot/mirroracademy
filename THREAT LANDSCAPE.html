@@ -1,0 +1,221 @@
+<!-- =========================
+PAGE 3: THREAT LANDSCAPE
+Source: Threat Landscape.docx
+========================= -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The AI Threat Landscape | Mirror Academy</title>
+  <meta name="description" content="Explore the AI threat landscape: prompt injection, data leakage, model manipulation, supply chain risks, and adversarial testing. Learn how threats connect in real incidents." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://mirrorsecurity.io/mirror-academy/ai-security-fundamentals/threat-landscape" />
+
+  <meta property="og:title" content="The AI Threat Landscape | Mirror Academy" />
+  <meta property="og:description" content="Prompt injection, data leakage, model manipulation, supply chain risks, and adversarial testing. Learn the patterns." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://mirrorsecurity.io/mirror-academy/ai-security-fundamentals/threat-landscape" />
+  <meta property="og:image" content="https://mirrorsecurity.io/assets/academy/threat-landscape-hero.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"The AI Threat Landscape",
+    "description":"Explore key AI threats and how they connect in real incidents.",
+    "author":{"@type":"Organization","name":"Mirror Security"},
+    "publisher":{"@type":"Organization","name":"Mirror Security"},
+    "mainEntityOfPage":"https://mirrorsecurity.io/mirror-academy/ai-security-fundamentals/threat-landscape"
+  }
+  </script>
+
+  <style>
+    :root{--bg:#0b0f14;--muted:#9fb0c3;--text:#eaf2ff;--brand:#7ee0ff;--brand2:#a78bfa;--line:rgba(255,255,255,.10)}
+    *{box-sizing:border-box} body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial; background:radial-gradient(1200px 600px at 10% 0%, rgba(126,224,255,.15), transparent 60%), radial-gradient(900px 600px at 90% 10%, rgba(167,139,250,.12), transparent 60%), var(--bg); color:var(--text); line-height:1.55}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+    .container{max-width:1100px;margin:0 auto;padding:28px 18px 80px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0 18px;border-bottom:1px solid var(--line)}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800}
+    .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.04);color:var(--muted);font-size:13px}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;padding:26px 0}
+    .hero h1{font-size:38px;line-height:1.1;margin:0 0 12px}
+    .hero p{margin:0 0 18px;color:var(--muted);font-size:16px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);font-weight:700}
+    .btn.primary{background:linear-gradient(135deg, rgba(126,224,255,.22), rgba(167,139,250,.22));border-color:rgba(255,255,255,.18)}
+    .btn:hover{filter:brightness(1.06)}
+    .card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:18px;padding:16px}
+    .grid{display:grid;gap:14px}
+    .grid.cols2{grid-template-columns:repeat(2, minmax(0, 1fr))}
+    .grid.cols3{grid-template-columns:repeat(3, minmax(0, 1fr))}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.grid.cols2,.grid.cols3{grid-template-columns:1fr}}
+    h2{font-size:22px;margin:28px 0 10px}
+    h3{font-size:16px;margin:0 0 6px}
+    .muted{color:var(--muted)}
+    .row{display:flex;gap:12px;align-items:flex-start}
+    .icon{width:34px;height:34px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);display:grid;place-items:center;flex:0 0 auto}
+    .accordion details{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:rgba(255,255,255,.03)}
+    .accordion details + details{margin-top:10px}
+    .accordion summary{cursor:pointer;font-weight:800}
+    .hr{height:1px;background:var(--line);margin:18px 0}
+    .levelGrid{display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:10px}
+    @media (max-width:900px){.levelGrid{grid-template-columns:1fr}}
+    .chip{border:1px solid var(--line);border-radius:14px;padding:12px;background:rgba(255,255,255,.03)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <!-- ASSET: Logo -->
+        <span style="display:inline-grid;place-items:center;width:34px;height:34px;border-radius:12px;background:rgba(126,224,255,.18);border:1px solid rgba(255,255,255,.14);font-weight:900">M</span>
+        <span>Mirror Academy</span>
+      </div>
+      <div class="pill"><span>AI Security Fundamentals</span><span style="opacity:.5">•</span><span>Module 3</span></div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1>The AI Threat Landscape</h1>
+        <p>
+          As AI systems move into production, they create a new class of security risks that traditional controls struggle to see and stop.
+          This module maps the threats you should plan for and shows how they connect in real incidents.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <a class="btn primary" href="https://mirrorsecurity.io/riskreport">Start with a Risk Assessment</a>
+          <a class="btn" href="#threats">Explore threats</a>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h3 style="margin-top:0">Why it is different</h3>
+        <p class="muted" style="margin:0">
+          AI systems are probabilistic, data-hungry, and integrated with tools. Small changes in input can drive big changes in behavior.
+          Attack techniques often look like normal usage from the outside.
+        </p>
+        <div class="hr"></div>
+        <div class="grid">
+          <div class="row"><div class="icon">🪝</div><div><strong>Prompt injection</strong><div class="muted">Most prevalent and dangerous threat.</div></div></div>
+          <div class="row"><div class="icon">💧</div><div><strong>Data leakage</strong><div class="muted">Sensitive info escapes through outputs, logs, or RAG.</div></div></div>
+          <div class="row"><div class="icon">🧪</div><div><strong>Manipulation</strong><div class="muted">Poisoning, tampering, theft, backdoors.</div></div></div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="threats">
+      <h2>Threat categories</h2>
+
+      <div class="accordion">
+        <details open>
+          <summary>Prompt injection</summary>
+          <p class="muted">
+            Prompt injection occurs when an attacker crafts input that causes an AI to ignore its original instructions and follow malicious commands instead.
+          </p>
+          <!-- ASSET: Simple diagram showing "User input → Model instructions override → Tool call / output" -->
+        </details>
+
+        <details>
+          <summary>Data leakage</summary>
+          <p class="muted">
+            Data leakage is the unintended exposure of sensitive information through AI systems, even if the underlying infrastructure is otherwise secure.
+          </p>
+
+          <!-- ASSET: Infographic with 4 levels (example: Low, Medium, High, Critical) -->
+          <div class="levelGrid" aria-label="Leakage risk levels" style="margin-top:10px">
+            <div class="chip"><strong>Level 1</strong><div class="muted">Accidental oversharing</div></div>
+            <div class="chip"><strong>Level 2</strong><div class="muted">Sensitive fragments in outputs</div></div>
+            <div class="chip"><strong>Level 3</strong><div class="muted">Systematic leakage via logs or RAG</div></div>
+            <div class="chip"><strong>Level 4</strong><div class="muted">High-impact exfiltration and reuse</div></div>
+          </div>
+
+          <div class="hr"></div>
+          <div class="grid cols2">
+            <div class="card">
+              <h3 style="margin-top:0">Common leakage paths</h3>
+              <ul class="muted" style="margin:0;padding-left:18px">
+                <li>Model outputs repeat or closely paraphrase sensitive training or prompt data.</li>
+                <li>Logs capture prompts, responses, and tool parameters without redaction.</li>
+                <li>Embeddings and vector databases store sensitive text with weak access control.</li>
+                <li>Third-party tools and APIs receive data without masking or governance.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3 style="margin-top:0">Examples of data at risk</h3>
+              <ul class="muted" style="margin:0;padding-left:18px">
+                <li>PII and health data</li>
+                <li>Source code, config files, and secrets</li>
+                <li>Contracts, roadmaps, incident reports, internal strategy docs</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>Model manipulation</summary>
+          <p class="muted">
+            Model manipulation changes how a model behaves, often in subtle ways that are hard to detect. It can look like "just another output" until patterns emerge.
+          </p>
+
+          <!-- ASSET: Key forms displayed as a flow of cards -->
+          <div class="grid cols2" style="margin-top:10px">
+            <div class="card"><strong>Training data poisoning</strong><div class="muted">Malicious or biased data alters behavior in specific situations.</div></div>
+            <div class="card"><strong>RAG and context poisoning</strong><div class="muted">Bad documents enter retrieval index and get trusted.</div></div>
+            <div class="card"><strong>Configuration and prompt tampering</strong><div class="muted">System prompts or safety policies changed without review.</div></div>
+            <div class="card"><strong>Model theft and cloning</strong><div class="muted">Extract parameters or replicate behavior to study weaknesses or reuse.</div></div>
+          </div>
+        </details>
+
+        <details>
+          <summary>Supply chain risks</summary>
+          <p class="muted">
+            AI systems depend on models, datasets, SDKs, SaaS platforms, and infrastructure providers. A single compromised link can cause multi-customer incidents.
+          </p>
+          <div class="grid cols2" style="margin-top:10px">
+            <div class="card"><strong>Model repositories</strong><div class="muted">Backdoored or lookalike models under trusted names.</div></div>
+            <div class="card"><strong>Datasets and benchmarks</strong><div class="muted">Poisoned or inappropriate public content.</div></div>
+            <div class="card"><strong>Libraries and frameworks</strong><div class="muted">Vulnerabilities or malicious code in toolchains.</div></div>
+            <div class="card"><strong>Third-party AI services</strong><div class="muted">Unknown posture, data handling, plugins, integrations.</div></div>
+          </div>
+        </details>
+
+        <details>
+          <summary>Adversarial testing</summary>
+          <p class="muted">
+            Adversarial testing probes AI systems with intentionally hostile inputs to discover weaknesses before attackers do.
+            Mature teams integrate it into pipelines and turn findings into guardrails and monitoring.
+          </p>
+          <div class="grid cols2" style="margin-top:10px">
+            <div class="card"><strong>Red-teaming prompts</strong><div class="muted">Jailbreaks, injection, bypass, leakage.</div></div>
+            <div class="card"><strong>Automated fuzzing</strong><div class="muted">Large volumes of varied inputs to find failure edges.</div></div>
+            <div class="card"><strong>Scenario exercises</strong><div class="muted">Simulate goals like exfiltration via chatbot.</div></div>
+            <div class="card"><strong>Structured outputs</strong><div class="muted">Attack paths, preconditions, impact, mitigations.</div></div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section>
+      <h2>How these threats connect</h2>
+      <!-- ASSET: Incident path diagram -->
+      <div class="card">
+        <p class="muted" style="margin:0">
+          These categories rarely appear in isolation. A single incident path might start with prompt injection, cause data leakage,
+          exploit a poisoned document or third-party model, and reveal gaps that adversarial testing would have caught.
+          Layered defenses beat isolated patches.
+        </p>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:26px">
+      <h2 style="margin-top:0">Ready to reduce AI risk?</h2>
+      <p class="muted">
+        Mirror Security provides visibility into AI risks and automated protection across your AI stack.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <a class="btn primary" href="https://mirrorsecurity.io/riskreport">Start with a Risk Assessment</a>
+        <a class="btn" href="/mirror-academy/ai-security-fundamentals/security-frameworks">Next: Security Frameworks for AI</a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

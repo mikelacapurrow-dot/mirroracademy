@@ -1,0 +1,220 @@
+<!-- =========================
+PAGE 5: GETTING STARTED WITH AI SECURITY
+Source: Getting Started with AI Security.docx
+========================= -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Getting Started with AI Security | Mirror Academy</title>
+  <meta name="description" content="A practical getting started guide for AI security: environment setup, tools you need, secure workflow steps, common pitfalls, and a downloadable pre-launch checklist." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://mirrorsecurity.io/mirror-academy/ai-security-fundamentals/getting-started" />
+
+  <meta property="og:title" content="Getting Started with AI Security | Mirror Academy" />
+  <meta property="og:description" content="Set up a safe AI environment with clear steps, pitfalls to avoid, and a pre-launch checklist." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://mirrorsecurity.io/mirror-academy/ai-security-fundamentals/getting-started" />
+  <meta property="og:image" content="https://mirrorsecurity.io/assets/academy/getting-started-hero.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"HowTo",
+    "name":"Getting Started with AI Security",
+    "description":"Set up a basic safe environment for AI, choose tools, follow a secure workflow, avoid pitfalls, and use a pre-launch checklist.",
+    "publisher":{"@type":"Organization","name":"Mirror Security"},
+    "mainEntityOfPage":"https://mirrorsecurity.io/mirror-academy/ai-security-fundamentals/getting-started"
+  }
+  </script>
+
+  <style>
+    :root{--bg:#0b0f14;--muted:#9fb0c3;--text:#eaf2ff;--brand:#7ee0ff;--brand2:#a78bfa;--line:rgba(255,255,255,.10)}
+    *{box-sizing:border-box} body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial; background:radial-gradient(1200px 600px at 10% 0%, rgba(126,224,255,.15), transparent 60%), radial-gradient(900px 600px at 90% 10%, rgba(167,139,250,.12), transparent 60%), var(--bg); color:var(--text); line-height:1.55}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+    .container{max-width:1100px;margin:0 auto;padding:28px 18px 80px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0 18px;border-bottom:1px solid var(--line)}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800}
+    .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.04);color:var(--muted);font-size:13px}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;padding:26px 0}
+    .hero h1{font-size:38px;line-height:1.1;margin:0 0 12px}
+    .hero p{margin:0 0 18px;color:var(--muted);font-size:16px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);font-weight:700}
+    .btn.primary{background:linear-gradient(135deg, rgba(126,224,255,.22), rgba(167,139,250,.22));border-color:rgba(255,255,255,.18)}
+    .btn:hover{filter:brightness(1.06)}
+    .card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:18px;padding:16px}
+    .grid{display:grid;gap:14px}
+    .grid.cols2{grid-template-columns:repeat(2, minmax(0, 1fr))}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.grid.cols2{grid-template-columns:1fr}}
+    h2{font-size:22px;margin:28px 0 10px}
+    h3{font-size:16px;margin:0 0 6px}
+    .muted{color:var(--muted)}
+    .row{display:flex;gap:12px;align-items:flex-start}
+    .icon{width:34px;height:34px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);display:grid;place-items:center;flex:0 0 auto}
+    .hr{height:1px;background:var(--line);margin:18px 0}
+    .checklist{display:grid;gap:10px;margin-top:10px}
+    .check{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:14px;padding:12px}
+    input[type="checkbox"]{width:18px;height:18px;margin-top:2px}
+    .small{font-size:13px}
+    .footerCtas{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <!-- ASSET: Logo -->
+        <span style="display:inline-grid;place-items:center;width:34px;height:34px;border-radius:12px;background:rgba(126,224,255,.18);border:1px solid rgba(255,255,255,.14);font-weight:900">M</span>
+        <span>Mirror Academy</span>
+      </div>
+      <div class="pill"><span>AI Security Fundamentals</span><span style="opacity:.5">•</span><span>Module 5</span></div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1>Getting Started with AI Security</h1>
+        <p>
+          This guide shows how to set up a basic, safe environment for AI, what tools you need, and a short checklist to avoid common mistakes
+          before anything goes live.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <a class="btn primary" href="https://mirrorsecurity.io/riskreport">Start with a Risk Assessment</a>
+          <a class="btn" href="#checklist">Jump to the checklist</a>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h3 style="margin-top:0">Who this is for</h3>
+        <p class="muted" style="margin:0">
+          Builders shipping assistants, RAG apps, or agents. If you are about to move from POC to production, this is your baseline.
+        </p>
+        <div class="hr"></div>
+        <div class="row"><div class="icon">✅</div><div><strong>Goal</strong><div class="muted small">Reduce risk without slowing shipping.</div></div></div>
+      </aside>
+    </section>
+
+    <section>
+      <h2>Environment setup</h2>
+      <div class="grid cols2">
+        <div class="card">
+          <div class="row">
+            <div class="icon">🧪</div>
+            <div>
+              <strong>Separate test and production</strong>
+              <div class="muted">Experiments should not touch real data or production tooling.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="row">
+            <div class="icon">🔐</div>
+            <div>
+              <strong>SSO and MFA</strong>
+              <div class="muted">Turn on SSO and MFA for anyone using AI tools.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="row">
+            <div class="icon">🗝️</div>
+            <div>
+              <strong>Secrets manager</strong>
+              <div class="muted">Keep API keys and passwords in a secrets manager, not in code or docs.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Tools you need</h2>
+      <div class="grid cols2">
+        <div class="card"><strong>Model access</strong><div class="muted">An SDK or platform to call models.</div></div>
+        <div class="card"><strong>Secure storage</strong><div class="muted">Data and embeddings with encryption and access control.</div></div>
+        <div class="card"><strong>Logging and alerting</strong><div class="muted">See prompts, responses, and tool calls with access control.</div></div>
+        <div class="card"><strong>Test runner</strong><div class="muted">A simple script to run test prompts and evaluations before go-live.</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Setting up a secure workflow</h2>
+      <!-- ASSET: Stepper UI (1 → 6) -->
+      <div class="grid cols2">
+        <div class="card"><strong>1) Define the use case</strong><div class="muted">Decide what data it can and cannot use.</div></div>
+        <div class="card"><strong>2) Prototype safely</strong><div class="muted">Use fake or low-risk data first.</div></div>
+        <div class="card"><strong>3) Add basic guardrails</strong><div class="muted">Blocked terms, safe tools, limits on who can use it.</div></div>
+        <div class="card"><strong>4) Test in staging</strong><div class="muted">Staging should look like production.</div></div>
+        <div class="card"><strong>5) Roll out gradually</strong><div class="muted">Start with a small group first.</div></div>
+        <div class="card"><strong>6) Watch logs closely</strong><div class="muted">Treat early days as active monitoring time.</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Common pitfalls</h2>
+      <div class="grid cols2">
+        <div class="card"><strong>Shadow AI</strong><div class="muted">Sensitive data sent to random AI tools from the internet.</div></div>
+        <div class="card"><strong>Hard-coded secrets</strong><div class="muted">Keys in notebooks, code, or documents.</div></div>
+        <div class="card"><strong>Over-permissioned agents</strong><div class="muted">Agents access everything instead of specific APIs.</div></div>
+        <div class="card"><strong>No telemetry</strong><div class="muted">No logs of prompts and responses.</div></div>
+        <div class="card"><strong>Skipping review</strong><div class="muted">“It’s just a POC” becomes production by accident.</div></div>
+      </div>
+    </section>
+
+    <section id="checklist">
+      <h2>First security checklist</h2>
+      <p class="muted" style="margin-top:0">Tick these before any AI app goes live.</p>
+
+      <!-- ASSET: Downloadable checklist PDF (watermark + CTA) -->
+      <div class="card">
+        <div class="checklist" id="checks"></div>
+
+        <div class="hr"></div>
+        <div class="footerCtas">
+          <div>
+            <strong>Download the complete checklist</strong>
+            <div class="muted small">Printable version for teams and approvals.</div>
+          </div>
+          <a class="btn primary" href="/assets/academy/ai-security-prelaunch-checklist.pdf" download>Download Checklist</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:26px">
+      <h2 style="margin-top:0">You completed AI Security Fundamentals</h2>
+      <p class="muted">Continue your journey with deeper modules.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <a class="btn" href="/mirror-academy/vector-database-security">Vector Database Security</a>
+        <a class="btn" href="/mirror-academy/ai-agent-security">AI Agent Security</a>
+        <a class="btn" href="/mirror-academy/genai-vulnerability-management">GenAI Vulnerability Management</a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const items = [
+      "Test and production are separate.",
+      "All secrets are in a secrets manager.",
+      "Data sources and sensitive fields are known.",
+      "Prompts and settings are in version control.",
+      "Agents and tools have only the access they need.",
+      "Prompts, outputs, and tool calls are logged.",
+      "Someone owns AI incidents and knows what to do if something goes wrong."
+    ];
+
+    const wrap = document.getElementById("checks");
+    items.forEach((text, idx) => {
+      const row = document.createElement("label");
+      row.className = "check";
+      row.innerHTML = `
+        <input type="checkbox" aria-label="Checklist item ${idx+1}">
+        <div>
+          <strong>${text}</strong>
+          <div class="muted small">Tip: treat this as a hard gate before go-live.</div>
+        </div>
+      `;
+      wrap.appendChild(row);
+    });
+  </script>
+</body>
+</html>

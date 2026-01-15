@@ -1,0 +1,357 @@
+<!-- =========================
+PAGE 1: INTRODUCTION TO AI SECURITY
+Source: Introduction to AI Security.docx
+========================= -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Introduction to AI Security | Mirror Academy</title>
+  <meta name="description" content="Learn AI security fundamentals: what AI security is, why it matters, core principles, key terminology, and real-world risk scenarios for LLMs, agents, and RAG systems." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://mirrorsecurity.io/mirror-academy/ai-security-fundamentals/introduction" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Introduction to AI Security | Mirror Academy" />
+  <meta property="og:description" content="Protect data, models, and usage in modern AI systems. Definitions, principles, and scenarios to learn fast." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://mirrorsecurity.io/mirror-academy/ai-security-fundamentals/introduction" />
+  <meta property="og:image" content="https://mirrorsecurity.io/assets/academy/ai-security-intro-hero.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Introduction to AI Security | Mirror Academy" />
+  <meta name="twitter:description" content="AI security fundamentals for LLMs, agents, and RAG apps." />
+  <meta name="twitter:image" content="https://mirrorsecurity.io/assets/academy/ai-security-intro-hero.png" />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Introduction to AI Security",
+    "description":"Learn AI security fundamentals: what AI security is, why it matters, core principles, key terminology, and real-world scenarios.",
+    "author":{"@type":"Organization","name":"Mirror Security"},
+    "publisher":{"@type":"Organization","name":"Mirror Security"},
+    "mainEntityOfPage":"https://mirrorsecurity.io/mirror-academy/ai-security-fundamentals/introduction"
+  }
+  </script>
+
+  <style>
+    :root{--bg:#0b0f14;--card:#111826;--muted:#9fb0c3;--text:#eaf2ff;--brand:#7ee0ff;--brand2:#a78bfa;--line:rgba(255,255,255,.10)}
+    *{box-sizing:border-box} body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial; background:radial-gradient(1200px 600px at 10% 0%, rgba(126,224,255,.15), transparent 60%), radial-gradient(900px 600px at 90% 10%, rgba(167,139,250,.12), transparent 60%), var(--bg); color:var(--text); line-height:1.55}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+    .container{max-width:1100px;margin:0 auto;padding:28px 18px 80px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0 18px;border-bottom:1px solid var(--line)}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
+    .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.04);color:var(--muted);font-size:13px}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;padding:26px 0}
+    .hero h1{font-size:40px;line-height:1.1;margin:0 0 12px}
+    .hero p{margin:0 0 18px;color:var(--muted);font-size:16px}
+    .ctaRow{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);font-weight:700}
+    .btn.primary{background:linear-gradient(135deg, rgba(126,224,255,.22), rgba(167,139,250,.22));border-color:rgba(255,255,255,.18)}
+    .btn:hover{filter:brightness(1.06)}
+    .card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:18px;padding:16px}
+    .grid{display:grid;gap:14px}
+    .grid.cols3{grid-template-columns:repeat(3, minmax(0, 1fr))}
+    .grid.cols2{grid-template-columns:repeat(2, minmax(0, 1fr))}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.grid.cols3,.grid.cols2{grid-template-columns:1fr}}
+    h2{font-size:22px;margin:28px 0 10px}
+    h3{font-size:16px;margin:0 0 6px}
+    .muted{color:var(--muted)}
+    .kpi{display:flex;flex-direction:column;gap:2px}
+    .kpi strong{font-size:14px}
+    .kpi span{font-size:13px;color:var(--muted)}
+    .layer{display:flex;gap:12px;align-items:flex-start}
+    .icon{width:34px;height:34px;border-radius:12px;background:rgba(126,224,255,.14);border:1px solid rgba(126,224,255,.25);display:grid;place-items:center;flex:0 0 auto}
+    .icon.purple{background:rgba(167,139,250,.14);border-color:rgba(167,139,250,.25)}
+    .icon.gray{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
+    .accordion details{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:rgba(255,255,255,.03)}
+    .accordion details + details{margin-top:10px}
+    .accordion summary{cursor:pointer;font-weight:800}
+    .tag{display:inline-flex;align-items:center;border:1px solid var(--line);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted)}
+    .nav{display:flex;flex-wrap:wrap;gap:10px}
+    .hr{height:1px;background:var(--line);margin:24px 0}
+    .terms{display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:12px}
+    @media (max-width:900px){.terms{grid-template-columns:1fr}}
+    .termCard{padding:14px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+    .termCard button{margin-top:10px}
+    .small{font-size:13px}
+    .footerCtas{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <!-- ASSET: Mirror Academy / Mirror Security logo -->
+        <span style="display:inline-grid;place-items:center;width:34px;height:34px;border-radius:12px;background:rgba(126,224,255,.18);border:1px solid rgba(255,255,255,.14);font-weight:900">M</span>
+        <span>Mirror Academy</span>
+      </div>
+      <div class="pill">
+        <span>AI Security Fundamentals</span>
+        <span style="opacity:.5">•</span>
+        <span>Module 1</span>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <span class="tag">Protecting the systems that power today’s intelligent applications</span>
+        <h1>Introduction to AI Security</h1>
+        <p>
+          AI systems are powerful, but they are also vulnerable. This module introduces the core ideas behind AI security,
+          why it matters, and the risks every organization should understand as they deploy LLMs, agents, and AI-driven workflows.
+        </p>
+        <div class="ctaRow">
+          <a class="btn primary" href="https://mirrorsecurity.io/riskreport">Start with a Risk Assessment</a>
+          <a class="btn" href="#continue">Explore Mirror Academy</a>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h3 style="margin-top:0">What you will learn</h3>
+        <div class="grid" style="margin-top:10px">
+          <div class="kpi"><strong>Definition</strong><span>What AI security protects and why it is different</span></div>
+          <div class="kpi"><strong>3 layers</strong><span>Protect data, models, and usage</span></div>
+          <div class="kpi"><strong>Principles</strong><span>Design, least privilege, testing, accountability</span></div>
+          <div class="kpi"><strong>Vocabulary</strong><span>Key terms you will see everywhere</span></div>
+          <div class="kpi"><strong>Scenarios</strong><span>Common real-world failure patterns</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="what-is">
+      <h2>What is AI Security?</h2>
+      <div class="card">
+        <p class="muted" style="margin:0">
+          AI security is the practice of protecting artificial intelligence systems, the data they process, and the infrastructure they run on from threats,
+          vulnerabilities, and misuse. As AI becomes embedded in critical business operations, security becomes essential to protect sensitive information,
+          maintain trust, and ensure AI behaves as intended.
+        </p>
+        <div class="hr"></div>
+        <p class="muted" style="margin:0">
+          Unlike traditional software, AI systems learn from data and make autonomous decisions. This creates new attack surfaces that conventional security tools were not designed to handle.
+          AI security focuses on the unique risks of ML models, LLMs, agents, and data pipelines.
+        </p>
+      </div>
+    </section>
+
+    <section id="three-layers">
+      <h2>The 3 layers of AI security</h2>
+
+      <!-- ASSET: Creative 3-layer diagram (Data / Models / Usage) with icons -->
+      <!-- Suggested visual: stacked cards or concentric rings with labels and example assets -->
+      <div class="grid cols3">
+        <div class="card">
+          <div class="layer">
+            <div class="icon">🧬</div>
+            <div>
+              <h3>Protecting data</h3>
+              <p class="muted small" style="margin:0">
+                Training data, prompts, embeddings, logs, and any sensitive information exposed to or generated by AI.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="layer">
+            <div class="icon purple">🧠</div>
+            <div>
+              <h3>Protecting models</h3>
+              <p class="muted small" style="margin:0">
+                Architectures, weights, fine-tuned variants, inference endpoints, and configuration.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="layer">
+            <div class="icon gray">🧰</div>
+            <div>
+              <h3>Protecting usage</h3>
+              <p class="muted small" style="margin:0">
+                Prompts, agents, tool calls, workflows, and user interactions that can be manipulated.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="why">
+      <h2>Why AI security matters</h2>
+      <div class="grid cols2">
+        <div class="card">
+          <h3 style="margin-top:0">AI is now part of the core stack</h3>
+          <p class="muted" style="margin:0">
+            AI is embedded into products, internal tools, and customer experiences. When those systems are misused or compromised,
+            impact can be immediate, highly visible, and hard to roll back compared to traditional back-end services.
+          </p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">The risk surface is different</h3>
+          <ul class="muted" style="margin:0;padding-left:18px">
+            <li>AI can expose sensitive data through training sets, prompts, logs, or generated responses.</li>
+            <li>Attackers can steer models toward harmful, biased, or fraudulent outputs that users trust by default.</li>
+            <li>Regulations and internal risk policies increasingly expect AI behavior, data handling, and monitoring to be controlled.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="principles">
+      <h2>Core principles</h2>
+
+      <!-- ASSET: Display these principles in a more visual, non-bulleted layout (timeline or "principle cards") -->
+      <div class="grid cols2">
+        <div class="card">
+          <h3 style="margin-top:0">Secure by design</h3>
+          <p class="muted" style="margin:0">Bring security and safety into the first design discussion, not as a late add-on.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Data protection first</h3>
+          <p class="muted" style="margin:0">Treat training, evaluation, and prompt data as high-value assets with classification and monitoring.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Least privilege for AI</h3>
+          <p class="muted" style="margin:0">Give models, agents, and tools only what they need, with clear boundaries.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Continuous evaluation</h3>
+          <p class="muted" style="margin:0">Test for jailbreaks, prompt injection, data leakage, and misuse using automated and manual techniques.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Human accountability</h3>
+          <p class="muted" style="margin:0">Keep clear ownership for AI decisions, configuration, and incident handling.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="terminology">
+      <h2>Key AI security terminology</h2>
+      <p class="muted" style="margin-top:0">
+        Tap a card to reveal the definition. At the end, download the vocabulary PDF with a watermark and CTA.
+      </p>
+
+      <!-- ASSET: Downloadable PDF with watermark + CTA -->
+      <!-- Suggested: /assets/academy/ai-security-terminology.pdf -->
+      <div class="terms" id="termGrid"></div>
+
+      <div class="card" style="margin-top:14px">
+        <div class="footerCtas">
+          <div>
+            <strong>Download the terminology PDF</strong>
+            <div class="muted small">Includes Mirror watermark and a CTA back to Mirror Academy.</div>
+          </div>
+          <a class="btn primary" href="/assets/academy/ai-security-terminology.pdf" download>Download PDF</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="examples">
+      <h2>Real-world scenarios</h2>
+      <p class="muted" style="margin-top:0">
+        These patterns show up across industries, even when teams believe their infrastructure is "secure enough."
+      </p>
+
+      <!-- ASSET: Vector icons next to each scenario -->
+      <div class="accordion">
+        <details open>
+          <summary>Support assistant leakage</summary>
+          <p class="muted">
+            A customer support chatbot trained or configured with internal knowledge reveals sensitive tickets, PII, or internal comments when prompted in creative ways.
+          </p>
+        </details>
+
+        <details>
+          <summary>Over-permissioned agents</summary>
+          <p class="muted">
+            An AI agent integrated with tickets, CRM, or deployment tools is given broad API access and unintentionally changes configs or sends messages to the wrong audience.
+          </p>
+        </details>
+
+        <details>
+          <summary>Poisoned knowledge</summary>
+          <p class="muted">
+            A knowledge base or vector store feeding a RAG system is polluted with malicious or outdated content, leading to misleading advice or policy violations.
+          </p>
+        </details>
+
+        <details>
+          <summary>Shadow AI usage</summary>
+          <p class="muted">
+            Teams adopt third-party AI tools without review, sending sensitive data to unmanaged endpoints and creating blind spots.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <section id="cta" class="card" style="margin-top:26px">
+      <h2 style="margin-top:0">Start securing your AI systems</h2>
+      <p class="muted">
+        AI adoption is accelerating, and so are the threats. Whether you deploy assistants, build RAG apps, or enable agents, security cannot be an afterthought.
+        Mirror Security helps protect against prompt injection, data leakage, and agent manipulation, with visibility and automated protection across your AI stack.
+      </p>
+      <div class="ctaRow">
+        <a class="btn primary" href="https://mirrorsecurity.io/riskreport">Start with a Risk Assessment</a>
+        <a class="btn" href="/mirror-academy">Explore Mirror Academy</a>
+      </div>
+    </section>
+
+    <section id="continue">
+      <h2>Continue learning</h2>
+      <div class="nav">
+        <a class="btn" href="/mirror-academy/ai-security-fundamentals/ai-security-vs-traditional-security">AI Security vs Traditional Security</a>
+        <a class="btn" href="/mirror-academy/ai-security-fundamentals/threat-landscape">The AI Threat Landscape</a>
+        <a class="btn" href="/mirror-academy/ai-security-fundamentals/security-frameworks">Security Frameworks for AI</a>
+        <a class="btn" href="/mirror-academy/ai-security-fundamentals/getting-started">Getting Started Guide</a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Terminology cards (tap to reveal)
+    const terms = [
+      {icon:"✨", term:"Generative AI (GenAI)", def:"AI systems that create new content such as text, images, or code based on patterns learned from data."},
+      {icon:"📚", term:"Large language model (LLM)", def:"A type of GenAI model trained on large text datasets to understand and generate natural language."},
+      {icon:"⌨️", term:"Prompt", def:"Input or instructions given to a model, including system messages, user queries, and contextual information."},
+      {icon:"🪝", term:"Prompt injection", def:"An attack where hidden or explicit instructions override intended model behavior."},
+      {icon:"🔓", term:"Jailbreak", def:"A technique that bypasses safety or policy constraints to force restricted responses."},
+      {icon:"📎", term:"Retrieval-augmented generation (RAG)", def:"The model retrieves relevant documents or chunks and uses them as context for generation."},
+      {icon:"🧪", term:"Model poisoning", def:"Manipulation of training or fine-tuning data to change behavior in subtle or malicious ways."},
+      {icon:"💧", term:"Data leakage", def:"Unintended exposure of sensitive or proprietary information through outputs, logs, or tools."},
+      {icon:"🤖", term:"AI agent", def:"A system using a model plus tools, memory, and decision logic to perform multi-step tasks."},
+      {icon:"🛡️", term:"Guardrails", def:"Policies, filters, checks, and controls that restrict what the AI can see, decide, or output."}
+    ];
+
+    const grid = document.getElementById("termGrid");
+    terms.forEach(t => {
+      const el = document.createElement("div");
+      el.className = "termCard";
+      el.innerHTML = `
+        <div style="display:flex;gap:10px;align-items:center">
+          <div class="icon gray" aria-hidden="true">${t.icon}</div>
+          <div>
+            <strong>${t.term}</strong>
+            <div class="muted small" data-state="hidden" style="margin-top:6px;display:none">${t.def}</div>
+          </div>
+        </div>
+        <button class="btn" type="button" style="margin-top:10px">Show definition</button>
+      `;
+      const btn = el.querySelector("button");
+      const def = el.querySelector('[data-state]');
+      btn.addEventListener("click", () => {
+        const isHidden = def.style.display === "none";
+        def.style.display = isHidden ? "block" : "none";
+        btn.textContent = isHidden ? "Hide definition" : "Show definition";
+      });
+      grid.appendChild(el);
+    });
+  </script>
+</body>
+</html>

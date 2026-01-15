@@ -1,0 +1,181 @@
+<!-- =========================
+PAGE 2: AI SECURITY VS TRADITIONAL SECURITY
+Source: AI Security vs Traditional Security.docx
+========================= -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Security vs Traditional Security | Mirror Academy</title>
+  <meta name="description" content="Understand how AI security differs from traditional security: new attack surfaces, probabilistic behavior, and controls for data, models, and agent usage." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://mirrorsecurity.io/mirror-academy/ai-security-fundamentals/ai-security-vs-traditional-security" />
+
+  <meta property="og:title" content="AI Security vs Traditional Security | Mirror Academy" />
+  <meta property="og:description" content="Why classic AppSec and cloud controls are not enough for LLMs, RAG, and agents." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://mirrorsecurity.io/mirror-academy/ai-security-fundamentals/ai-security-vs-traditional-security" />
+  <meta property="og:image" content="https://mirrorsecurity.io/assets/academy/ai-vs-traditional-hero.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"AI Security vs Traditional Security",
+    "description":"Understand why AI security differs from traditional security and what to do about it.",
+    "author":{"@type":"Organization","name":"Mirror Security"},
+    "publisher":{"@type":"Organization","name":"Mirror Security"},
+    "mainEntityOfPage":"https://mirrorsecurity.io/mirror-academy/ai-security-fundamentals/ai-security-vs-traditional-security"
+  }
+  </script>
+
+  <style>
+    :root{--bg:#0b0f14;--card:#111826;--muted:#9fb0c3;--text:#eaf2ff;--brand:#7ee0ff;--brand2:#a78bfa;--line:rgba(255,255,255,.10)}
+    *{box-sizing:border-box} body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial; background:radial-gradient(1200px 600px at 10% 0%, rgba(126,224,255,.15), transparent 60%), radial-gradient(900px 600px at 90% 10%, rgba(167,139,250,.12), transparent 60%), var(--bg); color:var(--text); line-height:1.55}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+    .container{max-width:1100px;margin:0 auto;padding:28px 18px 80px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0 18px;border-bottom:1px solid var(--line)}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800}
+    .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.04);color:var(--muted);font-size:13px}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;padding:26px 0}
+    .hero h1{font-size:38px;line-height:1.1;margin:0 0 12px}
+    .hero p{margin:0 0 18px;color:var(--muted);font-size:16px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);font-weight:700}
+    .btn.primary{background:linear-gradient(135deg, rgba(126,224,255,.22), rgba(167,139,250,.22));border-color:rgba(255,255,255,.18)}
+    .btn:hover{filter:brightness(1.06)}
+    .card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:18px;padding:16px}
+    .grid{display:grid;gap:14px}
+    .grid.cols2{grid-template-columns:repeat(2, minmax(0, 1fr))}
+    .grid.cols3{grid-template-columns:repeat(3, minmax(0, 1fr))}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.grid.cols2,.grid.cols3{grid-template-columns:1fr}}
+    h2{font-size:22px;margin:28px 0 10px}
+    h3{font-size:16px;margin:0 0 6px}
+    .muted{color:var(--muted)}
+    .hr{height:1px;background:var(--line);margin:18px 0}
+    .row{display:flex;gap:12px;align-items:flex-start}
+    .icon{width:34px;height:34px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);display:grid;place-items:center;flex:0 0 auto}
+    .tableWrap{overflow:auto;border-radius:16px;border:1px solid var(--line)}
+    table{width:100%;border-collapse:collapse;min-width:720px;background:rgba(255,255,255,.02)}
+    th,td{padding:12px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+    th{color:var(--muted);text-align:left;font-size:13px;letter-spacing:.2px}
+    td{font-size:14px}
+    .footerCtas{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <!-- ASSET: Logo -->
+        <span style="display:inline-grid;place-items:center;width:34px;height:34px;border-radius:12px;background:rgba(126,224,255,.18);border:1px solid rgba(255,255,255,.14);font-weight:900">M</span>
+        <span>Mirror Academy</span>
+      </div>
+      <div class="pill"><span>AI Security Fundamentals</span><span style="opacity:.5">•</span><span>Module 2</span></div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1>AI Security vs Traditional Security</h1>
+        <p>
+          Traditional security focuses on deterministic systems: known inputs, predictable behavior, and clear boundaries.
+          AI changes that. Models can be steered by context, influenced by data, and empowered through tools and agents.
+          This module explains what is different and how to adapt your security thinking.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <a class="btn primary" href="https://mirrorsecurity.io/riskreport">Start with a Risk Assessment</a>
+          <a class="btn" href="#compare">Jump to the comparison</a>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h3 style="margin-top:0">Fast takeaway</h3>
+        <p class="muted" style="margin:0">
+          AI security expands the scope from "protect the app" to "protect the data, model, and usage."
+          The same user prompt can become instructions, policy bypass, or data exfiltration depending on context.
+        </p>
+        <div class="hr"></div>
+        <div class="grid">
+          <div class="row"><div class="icon">🧩</div><div><strong>Probabilistic behavior</strong><div class="muted">Same input can produce different outputs.</div></div></div>
+          <div class="row"><div class="icon">🪝</div><div><strong>Instruction attacks</strong><div class="muted">Prompts can override intent (prompt injection).</div></div></div>
+          <div class="row"><div class="icon">🧰</div><div><strong>Tool risk</strong><div class="muted">Agents can take actions, not just answer.</div></div></div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="compare">
+      <h2>What changes with AI</h2>
+
+      <!-- ASSET: Side-by-side infographic: Traditional vs AI Systems -->
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Area</th>
+              <th>Traditional Security</th>
+              <th>AI Security</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>System behavior</strong></td>
+              <td>Deterministic, input validation and auth drive most outcomes</td>
+              <td>Probabilistic, behavior depends on context, prompts, and retrieved data</td>
+            </tr>
+            <tr>
+              <td><strong>Attack surface</strong></td>
+              <td>Endpoints, auth, dependencies, infra configs</td>
+              <td>Prompts, context, RAG sources, training data, model configs, tool calls</td>
+            </tr>
+            <tr>
+              <td><strong>Primary failures</strong></td>
+              <td>Unauthorized access, data exfiltration via classic exploits</td>
+              <td>Prompt injection, jailbreaks, data leakage through outputs/logs, agent misuse</td>
+            </tr>
+            <tr>
+              <td><strong>Controls</strong></td>
+              <td>WAF, IAM, patching, vulnerability scanning</td>
+              <td>Guardrails, least-privilege tooling for agents, prompt and output monitoring, adversarial testing</td>
+            </tr>
+            <tr>
+              <td><strong>Trust boundaries</strong></td>
+              <td>Clear, based on network and auth</td>
+              <td>Blurred: the model interprets user input as instructions unless constrained</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>The 3 layers still apply</h2>
+      <div class="grid cols3">
+        <div class="card">
+          <h3 style="margin-top:0">Data</h3>
+          <p class="muted">Protect training data, prompts, embeddings, logs, and sensitive outputs.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Models</h3>
+          <p class="muted">Protect weights, endpoints, fine-tunes, and configuration from tampering or theft.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Usage</h3>
+          <p class="muted">Protect prompts, agents, tool calls, workflows, and user interactions from manipulation.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:26px">
+      <h2 style="margin-top:0">Start securing your AI systems</h2>
+      <p class="muted">
+        Mirror Security helps organizations protect against prompt injection, data leakage, and agent manipulation
+        with visibility and automated protection across the AI stack.
+      </p>
+      <div class="footerCtas">
+        <a class="btn primary" href="https://mirrorsecurity.io/riskreport">Start with a Risk Assessment</a>
+        <a class="btn" href="/mirror-academy/ai-security-fundamentals/threat-landscape">Next: AI Threat Landscape</a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
